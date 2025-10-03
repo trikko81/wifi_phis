@@ -24,17 +24,11 @@
   <title>Login</title>
 
   <!-- Bootstrap core CSS -->
-  <link
-    href="https://cdn.classlink.com/production/launchpad/resources/bootstrap-3.4.1/css/bootstrap.min.css?t=1757576674000"
-    rel="stylesheet">
-  <link
-    href="https://cdn.classlink.com/production/launchpad/resources/font-awesome-4.5.0/css/font-awesome.css?t=1757576674000"
-    rel="stylesheet">
+  <link href="{{ url_for('static', filename='bootstrap-3.4.1/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='font-awesome-4.5.0/css/font-awesome.css') }}" rel="stylesheet">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,300,600" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,400italic" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/google-fonts.css') }}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="https://cdn.classlink.com/production/launchpad/css/login/login.css?t=1757576674000" rel="stylesheet">

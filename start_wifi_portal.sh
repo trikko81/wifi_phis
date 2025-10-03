@@ -21,4 +21,4 @@ sudo ip link set wlan0 up
 
 # Start Flask portal
 echo "Starting Flask portal..."
-sudo $(which python) ~/wifi_phis/portal/app.py
+sudo $(which python) ~/wifi_phis/portal/app.py>
