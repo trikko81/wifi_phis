@@ -7,6 +7,9 @@ app = Flask(__name__)
 
 # The name of the file to save credentials to
 LOG_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'logins.csv')
+@app.route('/connecttest.txt')
+def connecttest():
+    return "OK", 200
 
 @app.route('/')
 def home():
