@@ -10,6 +10,11 @@ LOG_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'logins.csv')
 def connecttest():
     return "OK", 200
 
+@app.route('/msftconnecttest/connecttest.txt')
+def msftconnect():
+    return "", 204   # Return empty 204 to signal “login required”
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
